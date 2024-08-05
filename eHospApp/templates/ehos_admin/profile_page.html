@@ -1,0 +1,408 @@
+{% extends 'ehos_admin/base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<!-- Custom Css -->
+{% block css %}
+{% endblock css %}
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+<!-- Top Bar -->
+<nav class="navbar p-l-5 p-r-5">
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="{% url 'dashboard_page' %}"><img src="https://thememakker.com/templates/oreo/hospital/html/assets/images/logo.svg" width="30"><span class="m-l-10">Ehospital</span></a>
+            </div>
+        </li>
+        <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+        <li class="d-none d-lg-inline-block"><a href="events.html" title="Events"><i class="zmdi zmdi-calendar"></i></a></li>
+        <li class="d-none d-lg-inline-block"><a href="mail-inbox.html" title="Inbox"><i class="zmdi zmdi-email"></i></a></li>
+        <li><a href="contact.html" title="Contact List"><i class="zmdi zmdi-account-box-phone"></i></a></li>
+        <li class="d-none d-md-inline-block">
+            <div class="input-group">                
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-addon">
+                    <i class="zmdi zmdi-search"></i>
+                </span>
+            </div>
+        </li>        
+        <li class="float-right">
+            <a href="{% url 'signin_page' %}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a>
+            <a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a>
+        </li>
+    </ul>
+</nav>
+<section class="content profile-pag">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-5 col-sm-12">
+                <h2>    <p>{{profile_data.Master.Email}}</p>
+                        <small>Welcome to Ehospital</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-7 col-sm-12">                
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard_page' %}"><i class="zmdi zmdi-home"></i> Ehospital</a></li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ul>                
+            </div>
+        </div>
+    </div> 
+  </br>
+  </br>   
+
+  </br>   
+  </br>   
+  <form method="post" action="{% url 'profile_update' %}" class="ms-panel-body">
+    {% csrf_token %}
+      <div class="form-row">
+          <div class="col-md-5 mb-4">
+              <div class="form-group">
+                <label for="validation">Full name</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Full name" name="full_name" value="{{profile_data.FullName}}" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="validation">DOB</label>
+                <div class="input-group">
+                  <input type="date" class="form-control" placeholder="DOB" name="dob" value="{{profile_data.DOB}}" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="validation">Gender</label>
+                <div class="input-group">
+                  <ul class="ms-list d-flex">
+                    <label>
+                      <input type="radio" class="form-control" name="gender" value="m" {% if profile_data.Gender == 'm' %}checked{% endif %}><i class="ms-checkbox-check"></i>
+                      <span>Male</span>
+                    </label>
+                  </ul>
+                  <ul>
+                    <label>
+                      <input type="radio" class="form-control" name="gender" value="f" {% if profile_data.Gender == 'f' %}checked{% endif %} ><i class="ms-checkbox-check"></i>
+                      <span>Female</span>
+                    </label>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        <div class="col-md-7 mb-4">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-4 mb-4">
+                <label for="validation">City</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="city" placeholder="City" value="{{profile_data.City}}" required />
+                  </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="validation">State</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="State" name="state" value="{{profile_data.State}}" required />
+                  </div>
+              </div>
+                <div class="col-md-4 mb-4">
+                  <label for="validation">Pincode</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="pincode" placeholder="Pincode" value="{{profile_data.Pincode}}" required />
+                    </div>
+                </div>
+            </div>            
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label for="exampleTextarea">Address</label>
+              <textarea class="form-control" id="exampleTextarea" name="address" rows="3" required>{{profile_data.Address}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="text-center">
+            <input type="submit"  class="btn btn-primary btn-round btn-block" value="SUBMIT"/>
+          </div>
+        </div>
+      </div>  
+  </form>
+
+</section>
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar">
+  <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#dashboard"><i class="zmdi zmdi-home m-r-5"></i>Ehospital</a></li>
+  </ul>
+  <div class="ms-profile-overview">
+    <div class="ms-profile-cover">
+      <style>
+        .profile_upload_form {
+          position: relative;
+        }
+        .upload_label {
+          background-color: white;
+          position: absolute;
+          bottom: -20px;
+          right: 130px;
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          padding: 4px;
+          color: black;
+          cursor: pointer;
+        }
+      </style>
+      <form action="{% url 'profile_image_upload' %}" method="post" class="profile_upload_form" onchange="this.submit()" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="profile_image" id="profile_image" class="d-none" accept=".jpg, .png" />
+        <label for="profile_image" class="upload_label">
+            <div class="demo-google-material-icon"> <i class="zmdi zmdi-face"></i> <span class="icon-name"></span> </div>
+        </label>
+        <img class="ms-profile-img"  src=" {% if profile_data.ProfileImage %}{{profile_data.ProfileImage.url}} {% else %} {% static 'assets/images/xs/avatar4.jpg' %} {% endif %}" >
+      </form>
+    <div class="tab-content">
+        <div class="tab-pane stretchRight active" id="dashboard">
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN</li>
+                    <li> <a href="{% url 'dashboard_page' %}" class="waves-effect waves-block"><i class="zmdi zmdi-home"></i><span>Ehospital</span> </a>
+                    <li><a href="{% url 'book-appointment' %}"><i class="zmdi zmdi-calendar-check"></i><span>Appointment</span> </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>   
+</aside>
+<!-- Right Sidebar -->
+<aside id="rightsidebar" class="right-sidebar">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activity">Activity</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane slideRight active" id="setting">
+            <div class="slim_scroll">
+                <div class="card">
+                    <h6>General Settings</h6>
+                    <ul class="setting-list list-unstyled">
+                        <li>
+                            <div class="checkbox">
+                                <input id="checkbox1" type="checkbox">
+                                <label for="checkbox1">Report Panel Usage</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="checkbox">
+                                <input id="checkbox2" type="checkbox" checked="">
+                                <label for="checkbox2">Email Redirect</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="checkbox">
+                                <input id="checkbox3" type="checkbox" checked="">
+                                <label for="checkbox3">Notifications</label>
+                            </div>                        
+                        </li>
+                        <li>
+                            <div class="checkbox">
+                                <input id="checkbox4" type="checkbox" checked="">
+                                <label for="checkbox4">Auto Updates</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>                
+                <div class="card">
+                    <h6>Skins</h6>
+                    <ul class="choose-skin list-unstyled">
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                        </li>                   
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                        </li>
+                        <li data-theme="cyan" class="active">
+                            <div class="cyan"></div>                    
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                        </li>
+                        <li data-theme="blush">
+                            <div class="blush"></div>                    
+                        </li>
+                    </ul>                    
+                </div>
+                <div class="card">
+                    <h6>Account Settings</h6>
+                    <ul class="setting-list list-unstyled">
+                        <li>
+                            <div class="checkbox">
+                                <input id="checkbox5" type="checkbox" checked="">
+                                <label for="checkbox5">Offline</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="checkbox">
+                                <input id="checkbox6" type="checkbox" checked="">
+                                <label for="checkbox6">Location Permission</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card theme-light-dark">
+                    <h6>Left Menu</h6>
+                    <button class="t-light btn btn-default btn-simple btn-round btn-block">Light</button>
+                    <button class="t-dark btn btn-default btn-round btn-block">Dark</button>
+                    <button class="m_img_btn btn btn-primary btn-round btn-block">Sidebar Image</button>                    
+                </div>                
+                <div class="card">
+                    <h6>Information Summary</h6>
+                    <div class="row m-b-20">
+                        <div class="col-7">                            
+                            <small class="displayblock">MEMORY USAGE</small>
+                            <h5 class="m-b-0 h6">512</h5>
+                        </div>
+                        <div class="col-5">
+                            <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="5" data-bar-Spacing="3" data-bar-Color="#00ced1">8,7,9,5,6,4,6,8</div>
+                        </div>
+                    </div>
+                    <div class="row m-b-20">
+                        <div class="col-7">                            
+                            <small class="displayblock">CPU USAGE</small>
+                            <h5 class="m-b-0 h6">90%</h5>
+                        </div>
+                        <div class="col-5">
+                            <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="5" data-bar-Spacing="3" data-bar-Color="#F15F79">6,5,8,2,6,4,6,4</div>
+                        </div>
+                    </div>
+                    <div class="row m-b-20">
+                        <div class="col-7">                            
+                            <small class="displayblock">DAILY TRAFFIC</small>
+                            <h5 class="m-b-0 h6">25 142</h5>
+                        </div>
+                        <div class="col-5">
+                            <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="5" data-bar-Spacing="3" data-bar-Color="#78b83e">7,5,8,7,4,2,6,5</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">                            
+                            <small class="displayblock">DISK USAGE</small>
+                            <h5 class="m-b-0 h6">60.10%</h5>
+                        </div>
+                        <div class="col-5">
+                            <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="5" data-bar-Spacing="3" data-bar-Color="#457fca">7,5,2,5,6,7,6,4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>                
+        </div>
+        <div class="tab-pane slideLeft" id="activity">
+            <div class="slim_scroll">
+                <div class="card user_activity">
+                    <h6>Recent Activity</h6>
+                    <div class="streamline b-accent">
+                        <div class="sl-item">
+                            <img class="user rounded-circle" src="{% static 'assets/images/xs/avatar4.jpg' %}" alt="">
+                            <div class="sl-content">
+                                <h5 class="m-b-0">Admin Birthday</h5>
+                                <small>Jan 21 <a href="javascript:void(0);" class="text-info">Sophia</a>.</small>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <img class="user rounded-circle" src="{% static 'assets/images/xs/avatar5.jpg' %}" alt="">
+                            <div class="sl-content">
+                                <h5 class="m-b-0">Add New Contact</h5>
+                                <small>30min ago <a href="javascript:void(0);">Alexander</a>.</small>
+                                <small><strong>P:</strong> +264-625-2323</small>
+                                <small><strong>E:</strong> maryamamiri@gmail.com</small>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <img class="user rounded-circle" src="{% static 'assets/images/xs/avatar6.jpg' %}" alt="">
+                            <div class="sl-content">
+                                <h5 class="m-b-0">Code Change</h5>
+                                <small>Today <a href="javascript:void(0);">Grayson</a>.</small>
+                                <small>The standard chunk of Lorem Ipsum used since the 1500s is reproduced</small>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <img class="user rounded-circle" src="{% static 'assets/images/xs/avatar7.jpg' %}" alt="">
+                            <div class="sl-content">
+                                <h5 class="m-b-0">New Email</h5>
+                                <small>45min ago <a href="javascript:void(0);" class="text-info">Fidel Tonn</a>.</small>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="card">
+                    <h6>Recent Attachments</h6>
+                    <ul class="list-unstyled activity">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="zmdi zmdi-collection-pdf l-blush"></i>                    
+                                <div class="info">
+                                    <h4>info_258.pdf</h4>                    
+                                    <small>2MB</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="zmdi zmdi-collection-text l-amber"></i>                    
+                                <div class="info">
+                                    <h4>newdoc_214.doc</h4>                    
+                                    <small>900KB</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="zmdi zmdi-image l-parpl"></i>                    
+                                <div class="info">
+                                    <h4>MG_4145.jpg</h4>                    
+                                    <small>5.6MB</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="zmdi zmdi-image l-parpl"></i>                    
+                                <div class="info">
+                                    <h4>MG_4100.jpg</h4>                    
+                                    <small>5MB</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="zmdi zmdi-collection-text l-amber"></i>                    
+                                <div class="info">
+                                    <h4>Reports_end.doc</h4>                    
+                                    <small>780KB</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="zmdi zmdi-videocam l-turquoise"></i>                    
+                                <div class="info">
+                                    <h4>movie2018.MKV</h4>                    
+                                    <small>750MB</small>
+                                </div>
+                            </a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+{% block scripts %}
+<script src=" {% static 'assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob Plugin Js -->
+<script src=" {% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+{% endblock scripts %}
+
+{% endblock main_content %}

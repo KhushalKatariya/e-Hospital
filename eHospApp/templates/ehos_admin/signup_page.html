@@ -1,0 +1,86 @@
+﻿{% extends 'ehos_admin/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'assets/css/authentication.css' %}">
+{% endblock css %}
+{% block main_content %}
+
+<body class="theme-cyan authentication sidebar-collapse">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
+    <div class="container">        
+        <div class="navbar-translate n_logo">
+            <a class="navbar-brand" href="{% url 'signin_page' %}" alt="logo" >Ehospital</a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav">               
+                <li class="nav-item">
+                    <a class="nav-link btn btn-white btn-round" href="{% url 'signin_page' %}">SIGN IN</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+<div class="page-header">
+    <div class="page-header-image" style="background-image:url({% static 'assets/images/login.jpg' %})"></div>
+    <div class="container">
+        <div class="col-md-12 content-center mp-Auto">
+            <div class="card-plain">
+                <form class="ms-panel-body" method="post" action="{% url 'registration' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <div class="logo-container">
+                            <img src="https://thememakker.com/templates/oreo/hospital/html/assets/images/logo.svg" alt="">
+                        </div>
+                        <h5>Sign Up</h5>
+                        <span>Register a new membership</span>
+                    </div>
+                    <div class="content">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="email" placeholder="Enter Email" required />
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-email"></i>
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" placeholder="Password" name="password" class="form-control" required />
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-lock"></i>
+                            </span>
+                        </div>                        
+                    </div>
+                    <div class="footer text-center">
+                        <button type="submit"  class="btn btn-primary btn-round btn-block " >Sign Up</button>
+                        <h5><a class="link" href="{% url 'signin_page' %}">You already have a membership?</a></h5>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="http://thememakker.com/contact/" target="_blank">Contact Us</a></li>
+                    <li><a href="http://thememakker.com/about/" target="_blank">About Us</a></li>
+                    <li><a href="javascript:void(0);">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</div>
+
+<!-- Jquery Core Js -->
+
+<script>
+   $(".navbar-toggler").on('click',function() {
+    $("html").toggleClass("nav-open");
+});
+</script>
+{% endblock main_content %}

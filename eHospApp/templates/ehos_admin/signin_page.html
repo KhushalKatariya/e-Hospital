@@ -1,0 +1,121 @@
+﻿{% extends 'ehos_admin/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'assets/css/authentication.css' %}">
+{% endblock css %}
+
+{% block main_content %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
+    <div class="container">        
+        <div class="navbar-translate n_logo">
+            <a class="navbar-brand" href="/" title="" target="_blank">Ehospital</a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav">           
+                <li class="nav-item">
+                    <a class="nav-link btn btn-white btn-round" href="/">SIGN UP</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+<div class="page-header">
+    <div class="page-header-image" style="background-image:url({% static 'assets/images/login.jpg' %})"></div>
+    <div class="container">
+        <div class="col-md-12 content-center">
+            <div class="card-plain">
+                <form class="form" method="Post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <div class="logo-container">
+                            <img src="https://thememakker.com/templates/oreo/hospital/html/assets/images/logo.svg" alt="">
+                        </div>
+                        <h5>Log in</h5>
+                    </div>
+                    <div class="content">                                                
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-email"></i>
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <input type="Password" placeholder="Password" name="password" class="form-control" required/>
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-4 d-block w-100  btn-round" type="submit">Sign In</button> 
+                    <div>
+                        <label class="d-block mt-3"><a href="#" class="link" data-toggle="modal" data-target="#modal-12">Forgot Password?</a>
+                        </label>
+                    </div>
+                    <p class="text-center">Don't have an account? <a class="link" href="/">Create Account</a> 
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="modal-12" tabindex="-1" role="dialog" aria-labelledby="modal-12">
+        <div class="modal-dialog modal-dialog-centered modal-min" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center"  style="background:LightGray">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+              </button> <i class="flaticon-secure-shield d-block"></i>
+              <h1 style="color:black;"><b>Forgot Password?</b></h1>
+              <p style="color:black;"><b>Enter your email to recover your password</b></p>
+              <form method="post" action="#" class="form">
+                {% csrf_token %}
+                <div class="ms-form-group has-icon">
+                    <div class="input-group">
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email" required />
+                        <span class="input-group-addon">
+                            <i class="zmdi zmdi-email"></i>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary shadow-none">Reset Password</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <footer class="footer">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="http://thememakker.com/contact/" target="_blank">Contact Us</a></li>
+                    <li><a href="http://thememakker.com/about/" target="_blank">About Us</a></li>
+                    <li><a href="javascript:void(0);">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</div>
+
+<!-- Jquery Core Js -->
+
+<script>
+   $(".navbar-toggler").on('click',function() {
+    $("html").toggleClass("nav-open");
+});
+//=============================================================================
+$('.form-control').on("focus", function() {
+    $(this).parent('.input-group').addClass("input-group-focus");
+}).on("blur", function() {
+    $(this).parent(".input-group").removeClass("input-group-focus");
+});
+</script>
+
+{% endblock main_content %}

@@ -1,0 +1,67 @@
+{% extends 'ehos_admin/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'assets/css/authentication.css' %}">
+{% endblock css %}
+{% block main_content %}
+
+<body class="theme-cyan authentication sidebar-collapse">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
+    <div class="container">        
+        <div class="navbar-translate n_logo">
+            <a class="navbar-brand" href="dashboard_page.html" >Ehospital</a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav">               
+                <li class="nav-item">
+                    <a class="nav-link btn btn-white btn-round" href="{% url 'signin_page' %}">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+<div class="page-header">
+    <div class="page-header-image" style="background-image:url({% static 'assets/images/login.jpg' %})"></div>
+    <div class="container">
+        <div class="col-md-12 content-center mp-Auto">
+            <div class="card-plain">
+                <form class="ms-panel-body" method="post" action="{% url 'verify_otp' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <div class="logo-container">
+                            <img src="https://thememakker.com/templates/oreo/hospital/html/assets/images/logo.svg" alt="">
+                        </div>
+                        <h5>One Time Password</h5>
+                    </div>
+                        <div class="input-group">
+                            <input type="password" placeholder="OTP" name="otp" class="form-control" required />
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-lock"></i>
+                            </span>
+                        </div>
+                        <button type="submit"  class="btn btn-primary btn-round btn-block " >Verify</button>                        
+                    </div>
+                    <div class="footer text-center">
+
+                        <h5><a class="link" href="{% url 'signin_page' %}">You already have a membership?</a></h5>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- Jquery Core Js -->
+
+<script>
+   $(".navbar-toggler").on('click',function() {
+    $("html").toggleClass("nav-open");
+});
+</script>
+{% endblock main_content %}
